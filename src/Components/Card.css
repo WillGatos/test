@@ -1,0 +1,34 @@
+.card{
+    margin-top: 50px;
+}
+.cardBody{
+    display: flex;
+    justify-content: space-between;
+}
+.cardBodyLeft{
+    display: flex;
+flex-direction: column;
+}
+
+.cardsFooter{
+    position: absolute;
+    top: 170px;
+    right: 0;
+}
+.cardFooterContainer{
+    width: 100%;
+}
+.cardFooterContainer div{
+    margin-left: 25px;
+}
+.favoriteShowUp{
+    animation: comeUp 0.2s forwards;
+}
+@keyframes comeUp{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 40px;
+    }
+}

@@ -1,0 +1,108 @@
+.individualPageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    width: 100vw;
+    margin-top: 3vh;
+}
+.border-0 {
+    border: 0px solid; 
+}
+.b-button{
+    background: linear-gradient(to right,#DA4740,#2235DC);
+}
+.individualImage{
+    width: auto;
+    height: 350px;
+}
+.font-color-secondary{
+    color: #9C9C9C;
+}
+.backgroundRed{
+    background-color: rgb(145, 38, 38);
+}
+.font-size-21{
+    font-size: 21px;
+}
+.margin-bottom-5px{
+    margin-bottom: 5px;
+};
+.typeIndividualPage{
+    color: gray;
+}
+.descriptionIndividualPage{
+    margin: 15px;
+}
+.getThereIndividualPage{
+    display: flex;
+    justify-content: space-around;
+    margin: 50px 0 0 0;
+    transition: clip-path 1s ease, color 1s 1s ease;
+    background: #353a42;
+    padding: 25px;
+    clip-path: polygon(100% 0, 100% 0%, 100% 100%, 100% 100%);
+}
+.getThereIndividualPageAnimation{
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    color: white;
+}
+.principalImageContainer{
+    overflow-x: auto;
+}
+.secondaryImages{
+    height: 350px;
+    width: auto;
+}
+.secondaryImagesIndividualPage{
+    width: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-top: 5px;
+    justify-content: flex-start;
+}
+.secondaryImagesIndividualPage > div{
+    margin-right: 10px;
+}
+.footerIndividualPage{
+    background: black;
+    color: white;
+    display: flex;
+    height: 254px;
+}
+.centerFooterIndividualPageElements{
+    text-align: center;
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+    
+    margin: 10px;
+}
+.sendReservationButton{
+    background: #343941;
+    margin-top: 5px;
+    width: 85vw;
+    border-radius: 6px;
+    margin-left: 5vw;
+    padding: 5px;
+}
+.p-2vw{
+    padding: 2vw;
+}
+.footerIndividualPage{
+    display: flex;
+    justify-content: space-evenly;
+    background: #242A33;
+    color: #e4e4e4;
+    height: 100%;
+    text-align: center;
+    align-content: center;
+    flex-direction: column;
+    margin-top: 10px;
+}
+.centerFooterIndividualPageElements img{
+    height: 50px;
+}
+.gmap_canvas {overflow:hidden;background:none!important;height:50vh;width:100%;}
+.mapouter{position:relative;text-align:right;height:50vh;width:100%;}

@@ -1,0 +1,32 @@
+.email-textarea{
+    height: 230px;
+    width: 80vw;
+    max-width: 500px;
+}
+.email-textarea div {
+    width: inherit;
+max-width: inherit;
+}
+
+.email-inputs{
+    height: 53px;
+}
+.email-contact{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5vh 0;
+    flex-wrap: wrap;
+}
+#email-submit-button{
+    margin-top: 5vh;
+}
+@media (max-width: 600px) {
+    .email-contact div{
+        width: 80vw;
+    max-width : 500px;
+    }
+    .contact-input{
+        margin-top: 35px;
+    }
+}

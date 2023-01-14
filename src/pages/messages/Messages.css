@@ -1,0 +1,10 @@
+.messagesCard{
+    width: 80vw;
+    background: #1b1a1a;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+}
+.p-10{
+    padding: 10px;
+}

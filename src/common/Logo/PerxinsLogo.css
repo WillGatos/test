@@ -1,0 +1,25 @@
+@keyframes logoAnimation {
+    to{
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes fill {
+    from{
+        fill: #ffffff00;
+    }
+    to{
+        fill: #000000;
+    }
+}
+#hexaedro{
+    animation: fill2 1s ease forwards 2.5s
+}
+
+@keyframes fill2 {
+    from{
+        fill: #000000;
+    }
+    to{
+        fill: #ffffff;
+    }
+}

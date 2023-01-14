@@ -1,0 +1,49 @@
+  .formContainer label{
+    color: white;
+  }
+  .formContainer button {
+    margin-top: 15px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: #1b3668;
+    font-size: larger;
+  }
+
+  .formContainer button:hover {
+    cursor: pointer;
+    background-color: dodgerblue;
+  }
+  
+.formContainer #authInputs {
+    height: 40px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  .AuthForm{
+    width: 80vw;
+    margin-top: auto;
+  }
+  @media (min-width: 600px) {
+    .formContainer #authInputs {
+      width: 70vw;
+    }
+    
+  }
+  .progressBar{
+    background-color: white;
+    height: 3px;
+    width: 0%;
+    position: absolute;
+left: 0;
+transition: width 0.4s ease;
+  }
+  .successMessage{
+    background-color: rgba(44, 197, 44, 0.678);
+    padding: 7px;
+    margin: 15px 30px;
+    border-radius: 9px;
+  }

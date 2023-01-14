@@ -1,0 +1,23 @@
+.formButtons{
+    display: flex;
+    justify-content: space-evenly;
+    /* position: absolute;
+    bottom: 5px; */
+    width: 100%;
+    padding-bottom: 10px;
+    height: 63px;
+    background: #181a1d;
+}
+.formContent{
+    display: flex;
+    flex-direction: column;
+    margin: 50px 50px 0 50px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}.formContent > div{
+    margin-top: 2vh;
+}
+.innerElementsMargin > div{
+    margin-top: 2vh;
+}

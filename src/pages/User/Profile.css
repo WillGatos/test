@@ -1,0 +1,86 @@
+.profilePageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+#profileCards > a{
+margin: 10px 0;
+}
+
+.userImage{
+    position: relative;
+
+}
+.userImage div{
+    max-height: 200px;
+max-width: 200px;
+height: 25vw;
+width: 25vw;
+}
+.userImage label{
+    position: absolute;
+    right: 7px;
+    bottom: 0;
+    background: white;
+    border-radius: 246px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.basicInfo{
+    width: 98vw;
+    height: 100vh;
+}
+.buttonGroup{
+    position: absolute;
+    top: 25%;
+    right: 15px;
+}
+.buttonGroup button{
+    margin-left: 25px;
+}
+
+.cardContainer{
+width: 80vw;
+max-width: 500px;
+border-radius: 8px;
+height: 7vh;
+min-height: 70px;
+position: relative;
+padding-left: 2vw;
+padding-top: 1vh;
+background: #242932;
+}
+.createBgImg{
+    display: flex;
+height: 50vh;
+max-height: 500px;
+background: #000000e6;
+}
+#profileIcon{
+    color: black;
+}
+.sideBgImg{
+    width: 50vw;
+text-align: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-content: center;
+}
+#profileCards > div{
+    margin: 20px;
+}
+#openUpdateModal > div{
+    margin: 15px 0;
+}
+#openUpdateModalButtons > button{
+    margin: 10px 15px;
+    padding: 5px 15px;
+    font-size: 20px;
+    border: 0px;
+    border-radius: 5px;
+}
