@@ -114,6 +114,7 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
   }
 
   const setDefaultSearch = (url) => {
+    setOpenLoadingBackdrop(true)
     setApiCall("get", url )
       .then( response => handleServicesFetching(response))
       .then(() => {
