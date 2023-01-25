@@ -1,11 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useHistory, useLocation } from 'react-router';
+import { 
+  useState, 
+  useEffect, 
+  useContext,
+  useRef,
+  useCallback } from "react";
+import { useHistory } from 'react-router';
 import { AuthContext } from "../helpers/AuthContext";
 import ShareIcon from '@mui/icons-material/Share';
 import Cards from "../Components/Cards";
 import useCheckToken from "../Hooks/useCheckToken";
 import ShareModal from "../common/Components/ShareComponents/ShareModal";
-import TextField from '@mui/material/TextField';
+//import TextField from '@mui/material/TextField';
 //import SearchIcon from '@mui/icons-material/Search';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -29,6 +34,7 @@ import ReactHelmet from "../common/Components/SEO/ReactHelmet";
 import SubmitDialog from "../common/Components/SubmitDialog";
 import perxinsIcon from "../SVG/PenroseTriangle.png"
 import { Link } from "react-router-dom";
+import EliminateKey from "../helpers/EliminateKey";
 
 function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
   const { authState, setOpenLoadingBackdrop } = useContext(AuthContext);
@@ -47,22 +53,21 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
   const [error, setError] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
 
-  
   const { _id } = authState;
   let history = useHistory();
 
-  let searchDefaultOnBottom = {
+  const searchDefaultOnBottom = useRef({
     skip: 10,
     isDefaultSearch: true,
-  };
-  const observer = React.useRef()
+  });
+  const observer = useRef()
 
   const handleClickOpen = () => setOpen(true);
   const setApiCall = useCheckToken(()=>{})
   const handleClose = () => setOpen(false);
-  const getLikedService = React.useCallback(()=> {
+  const getLikedService = useCallback(()=> {
       if(accessToken)
-      setApiCall("get","https://api.perxins.com/user/fullUser")
+      setApiCall("get","http://localhost:3001/user/fullUser")
       .then(e => {
       const givenLikes = e.data.givenLikes;
       
@@ -86,25 +91,17 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
     setSearch(false);
   }
   const searchByQuery = (url) => {
-    Object.keys(query).forEach(key => {
-      if (
-      query[key] === ''  ||
-      query[key] === null||
-      query[key] === []  ||
-      query[key] === ""  ||
-      query[key] === "Ninguno"||
-      query[key] === "Cualquiera"
-      ) {
-        delete query[key];
-      }
-    });
-    console.log(query)
+    query = EliminateKey(query)
     const urlQueries = new URLSearchParams(query).toString()
       setApiCall("get",`${url}?${urlQueries}`)
       .then( response => handleServicesFetching(response))
       .then(() => {
         getLikedService()
         setOpenLoadingBackdrop(false)
+        console.log( searchDefaultOnBottom.current.isDefaultSearch)
+        searchDefaultOnBottom.current.isDefaultSearch = false;
+
+        console.log( searchDefaultOnBottom.current.isDefaultSearch)
       })
       .catch((e)=> {
         setError(true)
@@ -113,9 +110,10 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
       setOpenLoadingBackdrop(false)
   }
 
+  const urlParams = new URLSearchParams(window.location.search)
   const setDefaultSearch = (url) => {
     setOpenLoadingBackdrop(true)
-    setApiCall("get", url )
+    setApiCall("get", `${url}?${urlParams}`)
       .then( response => handleServicesFetching(response))
       .then(() => {
         getLikedService()
@@ -127,12 +125,14 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
       })
       setOpenLoadingBackdrop(false)
   }
+  
   const setDefaultSearchOnSkip = (url) => {
-    setApiCall("get", url )
+
+    setApiCall("get",`${url}?${urlParams}&skip=${searchDefaultOnBottom.current.skip}` )
       .then( response => handleServicesFetching(response))
       .then(() => {
         getLikedService()
-        searchDefaultOnBottom.skip += 10;
+        searchDefaultOnBottom.current.skip += 10;
         setOpenLoadingBackdrop(false)
       })
       .catch((e)=> {
@@ -201,7 +201,6 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
     setShareValues({url, quote})
   }
   const getNewDataAfterBottom = (township) => {
-    //setNextSearchQuery(false)
     query.township = township
     searchByQuery(`${apiURL}/findBasic`)
   }
@@ -228,7 +227,7 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
                   onClick={()=>{
                   sharingCard(service._id, service.name);
                   handleClickOpen()
-                  axios.get(`https://api.perxins.com/${serviceOrEvent}s/shared/${service._id}`, /* {
+                  axios.get(`http://localhost:3001/${serviceOrEvent}s/shared/${service._id}`, /* {
                     headers:  {'Authorization': 'Bearer '+ accessToken},
                   } */)
                 }}
@@ -254,13 +253,17 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
       setSearch(false);
     }
     else{
-      setDefaultSearch(`https://api.perxins.com/${serviceOrEvent === "service" ? "services" : "events"}/defaultSearch`);
+      setDefaultSearch(
+        `http://localhost:3001/${
+          serviceOrEvent === "service" 
+          ? "services" : "events"
+        }/defaultSearch`);
       //TODO: Llamada a una ruta que sea findAll.skip.limit(20)
       setSearch(false);
     }
   },[])
 
-  const lastElementObserver = React.useCallback((node)=>{
+  const lastElementObserver = useCallback((node)=>{
     if(observer.current) {
       //que hace disconnect?
       observer.current.disconnect()
@@ -268,33 +271,32 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
 
     observer.current = new IntersectionObserver(entries =>{
       if(entries[0].isIntersecting){
-        if(searchDefaultOnBottom.isDefaultSearch){
+        console.log( "1", searchDefaultOnBottom.current.isDefaultSearch)
+        if(searchDefaultOnBottom.current.isDefaultSearch){
           setDefaultSearchOnSkip(
-            "https://api.perxins.com/services/defaultSearchOnSkip?skip="
-            + searchDefaultOnBottom.skip
+            "http://localhost:3001/services/defaultSearchOnSkip"
             )
         }
         else{
           setNextSearchQuery(true)
         }
-        
       }
     })
 
     if(node) observer.current.observe(node)
   },[])
 
-  const observerEvent = React.useRef()
-  const lastEventObserver = React.useCallback((node)=>{
+  const observerEvent = useRef()
+  const lastEventObserver = useCallback((node)=>{
+    console.log( "1", searchDefaultOnBottom.current.isDefaultSearch)
     if(observerEvent.current) {
       observerEvent.current.disconnect()
     }
     observerEvent.current = new IntersectionObserver(entries =>{
       if(entries[0].isIntersecting){
-        if(searchDefaultOnBottom.isDefaultSearch){
+        if(searchDefaultOnBottom.current.isDefaultSearch){
           setDefaultSearchOnSkip(
-            "https://api.perxins.com/events/defaultSearchOnSkip?skip="
-            + searchDefaultOnBottom.skip
+            "http://localhost:3001/events/defaultSearchOnSkip"
             )
         }
         else{
@@ -311,19 +313,31 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
       return
     }
     if(isPaying){
-      return <p>Recomendados <hr/></p>
+      return <div>
+              <p>Recomendados </p>
+              <hr/>
+            </div>
     }
     if(weekDays){
-      return <p>Repetidos los {weekEntireDay[+weekDays]}<hr/></p>
+      return <div>
+              <p>Repetidos los {weekEntireDay[+weekDays]}</p>
+              <hr/>
+            </div>
     }
     if(continuesEventsEndDay && lastDay !== "continuesEventsEndDay"){
       lastDay = "continuesEventsEndDay";
-      return <div><p>Eventos de más de un día</p> <hr/></div>
+      return <div>
+          <p>Eventos de más de un día</p>
+          <hr/> 
+        </div>
     }
     if(serviceTime) {
       lastDay = serviceTime
       serviceTime = new Date(serviceTime)
-      return <p>{serviceTime.getDate()+1} - {serviceTime.getMonth()+1} <hr/></p>
+      return <div>
+              <p>{serviceTime.getDate()+1} - {serviceTime.getMonth()+1} </p>
+              <hr/>
+            </div>
     }
   }
 
@@ -336,7 +350,9 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
       {search
       ?<form onSubmit={onSearch} id="authContainer"> 
       {error&& <p className="errorMessage">Compruebe su conexión</p>}
-      <p className="font-size-25 font-color-white">Buscar en Perxins</p>
+      <p className="font-size-25 font-color-white">
+        Buscar en Perxins
+      </p>
         <p className="font-size-25 font-color-gray">{serviceOrEvent==="service"?"Locales":"Eventos"}</p>
         <FormControl 
           className="border-blue inputs-changer"
@@ -513,10 +529,10 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
         {nextSearchQuery&&<div className="p-r" style={{margin: "5vh 0 15vh 0", width: "90%"}}>
           <p className="font-color-white">Desea ver otras ofertas en:</p>
           <div style={{width:"90%", top: "30px"}} className="p-a">
-            {townshipBinds.map((bindsPerTownship) => {
+            {townshipBinds.map((bindsPerTownship,key) => {
             if(bindsPerTownship.township === query.township){
               return (bindsPerTownship.connections.map((e,key2) => <button
-              key={key2}
+              key={key2 + key}
               className=" border-radius-50 font-color-white"
               style={{
                 padding: "3px 8px",
@@ -538,7 +554,7 @@ function SearchAndFind({ likesUrl, apiURL, serviceOrEvent, query, setQuery}) {
       
       <div onClick={()=>{
           setSearch(!search)
-          searchDefaultOnBottom.isDefaultSearch = false
+          searchDefaultOnBottom.current.isDefaultSearch = false
           }} className="circleButton" id="circleButtonLeft">
           <Search color="white" className="svgIcon"/>
         </div>

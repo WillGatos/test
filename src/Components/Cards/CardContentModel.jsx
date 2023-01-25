@@ -30,7 +30,6 @@ function CardContentModel({
               <span>{type!=="Presentación Teatral"&& type}</span>
               -
               <span className='font-bold'> {name}</span>
-              {console.log("2",service)}
              {/* {placeToSetEvent&&<p style={{fontSize: "14px"}}>{placeToSetEvent}</p>} */}
              <hr style={{width: "90%"}}/>
             </div>

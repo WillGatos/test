@@ -5,7 +5,7 @@ import notifyMe from '../../helpers/notifyMe'
 function SubscribeButton({authState, setAuthState, service, fontSize, setLoginError}) {
     const setApiCall = useCheckToken(()=>{})
     const subscribeToService = () => {
-        setApiCall("get", `https://api.perxins.com/user/subscription/${service._id}`)
+        setApiCall("get", `http://localhost:3001/user/subscription/${service._id}`)
         .then(()=> {setAuthState({...authState, subscriptions: [...authState.subscriptions, service]})})
         .catch(e=> setLoginError(true))
     }

@@ -32,9 +32,9 @@ import SimpleBackdrop from "./Animations/Backdrop";
 import SearchServiceDialog from "./Components/SearchServiceDialog";
 import { getSubscription } from "./helpers/notifyMe";
 import PhoneIcon from "./SVG/phone.jsx"
-//const Admin = React.lazy(() => import('./pages/Admin'));
-//const ExcelUpload = React.lazy(() => import("./pages/Admin/ExcelUpload")) 
-
+const Admin = React.lazy(() => import('./pages/Admin'));
+const ExcelUpload = React.lazy(() => import("./pages/Admin/ExcelUpload")) 
+const Share = React.lazy(() => import("./pages/Admin/Share")) 
 function App() {
   const [authState, setAuthState] = useState({});
   const [isNotificationPanelOpen, setIsNotificationPanelOpen] = useState(false)
@@ -87,7 +87,7 @@ const [searchServiceDialogOpen, setSearchServiceDialogOpen] = useState(false)
       {
         getSubscription()
         setIsNotificationPanelOpen(false)
-        axios.get("https://api.perxins.com/user/fullUser",{
+        axios.get("http://localhost:3001/user/fullUser",{
           headers:  {'Authorization': 'Bearer '+ accessToken},
         }).then((e)=> {
           localStorage.setItem("userId", e.data._id);
@@ -175,8 +175,8 @@ const [searchServiceDialogOpen, setSearchServiceDialogOpen] = useState(false)
               <SearchAndFind 
                 setQuery={setServiceQuery}
                 query={serviceQuery}
-                likesUrl={"https://api.perxins.com/likes"} 
-                apiURL={"https://api.perxins.com/services"} 
+                likesUrl={"http://localhost:3001/likes"} 
+                apiURL={"http://localhost:3001/services"} 
                 serviceOrEvent={"service"}
               />
             </Route>
@@ -187,12 +187,22 @@ const [searchServiceDialogOpen, setSearchServiceDialogOpen] = useState(false)
               />
             </Route>
 
+            <Route path="/cine/:subcategory" exact >
+              <SearchAndFind 
+                query={eventsQuery}
+                setQuery={setEventsQuery}
+                likesUrl={"http://localhost:3001/eventsLikes"}
+                apiURL={"http://localhost:3001/events"}
+                serviceOrEvent={"event"}
+              />
+              </Route>
+
             <Route path="/event" exact >
               <SearchAndFind 
                 query={eventsQuery}
                 setQuery={setEventsQuery}
-                likesUrl={"https://api.perxins.com/eventsLikes"}
-                apiURL={"https://api.perxins.com/events"}
+                likesUrl={"http://localhost:3001/eventsLikes"}
+                apiURL={"http://localhost:3001/events"}
                 serviceOrEvent={"event"}
               />
             </Route>
@@ -224,14 +234,14 @@ const [searchServiceDialogOpen, setSearchServiceDialogOpen] = useState(false)
               <Create 
                   serviceOrEvent={"service"} 
                   method={"post"}
-                  route={"https://api.perxins.com/services/create"}
+                  route={"http://localhost:3001/services/create"}
               />
             </Route> 
             <Route path="/updateservice/:id" exact>
               <Create 
                   serviceOrEvent={"service"} 
                   method={"patch"}
-                  route={"https://api.perxins.com/services/"}
+                  route={"http://localhost:3001/services/"}
                />
             </Route> 
             {/*<Route path="/poll" exact component={Poll} />*/}
@@ -250,32 +260,34 @@ const [searchServiceDialogOpen, setSearchServiceDialogOpen] = useState(false)
               <Create 
                 serviceOrEvent={"event"} 
                 method={"post"}
-                route={"https://api.perxins.com/events/create"}
+                route={"http://localhost:3001/events/create"}
               />
             </Route>
             <Route path="/createEvent/:id" exact>
               <Create 
                 serviceOrEvent={"event"} 
                 method={"post"}
-                route={"https://api.perxins.com/events/create"}
+                route={"http://localhost:3001/events/create"}
               />
             </Route>
             <Route path="/updateevent/:id" exact>
               <Create 
                 serviceOrEvent={"event"} 
                 method={"patch"}
-                route={"https://api.perxins.com/events/"}
+                route={"http://localhost:3001/events/"}
               />
             </Route> 
             <Route path="/businessOffers" exact component={BusinessOffers} /> 
 
             {/* TODO: Comment before Launch */}
             
-             {/* <Suspense fallback={()=><h1>Cargando...</h1>}>
+              <Suspense fallback={()=><h1>Cargando...</h1>}>
               <Route path="/test" exact component={ExcelUpload} />
               <Route path="/admin" component={Admin}/>
+              <Route path="/shareWhatsApp" component={Share}/>
+              
             </Suspense>
- */}
+
             <Route path="" component={PageNotFound} />
             </Switch>
           <SimpleBackdrop 

@@ -39,7 +39,7 @@ function RegistrationForm({formValues, setFormValues, setChangeOfPage}) {
         formData.append('password', formValues.password)
         formData.append('email', formValues.email)
         
-    axios.post("https://api.perxins.com/user/signup", formValues)
+    axios.post("http://localhost:3001/user/signup", formValues)
     .then((response)=>{
         setChangeOfPage(false)
         setOpenLoadingBackdrop(false)

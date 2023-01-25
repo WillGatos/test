@@ -32,7 +32,7 @@ export function getSubscription(){
           })
           const userId = localStorage.getItem("userId");
           await axios.patch(
-            'https://api.perxins.com/user/userNotificationSubscription',
+            'http://localhost:3001/user/userNotificationSubscription',
             {userId, sub})
             .catch((e)=>console.log(e))
           }

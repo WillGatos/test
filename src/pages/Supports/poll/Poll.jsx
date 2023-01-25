@@ -18,7 +18,7 @@ function Poll() {
     const onVote= (suggestionId)=>{
         setApiCall(
             "post",
-            `https://api.perxins.com/support/vote/${suggestionId}`,
+            `http://localhost:3001/support/vote/${suggestionId}`,
             null
             )
         .then(() => setRechargePage(prevState=> prevState +1))
@@ -26,7 +26,7 @@ function Poll() {
     }
 
     const createSuggestion=()=>{
-        setApiCall("post","https://api.perxins.com/support", newSuggestion)
+        setApiCall("post","http://localhost:3001/support", newSuggestion)
         .then(() => setRechargePage(prevState=> prevState+1))
         .catch(e => console.log(e.message))
     }
@@ -35,7 +35,7 @@ function Poll() {
     }
 
     useEffect(()=>{
-        setApiCall("get","https://api.perxins.com/support")
+        setApiCall("get","http://localhost:3001/support")
         .then(e => {
             console.log(e.data)
             setPropose(e.data)

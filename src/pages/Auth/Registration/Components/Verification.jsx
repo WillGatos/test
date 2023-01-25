@@ -20,7 +20,7 @@ function Verification({formValues, setFormValues,setChangeOfPage}) {
     e.preventDefault()
     
     if(formValues.verificationCode!==""){
-    axios.post("https://api.perxins.com/user/verification", formValues)
+    axios.post("http://localhost:3001/user/verification", formValues)
     .then((response) => {
       setOpenLoadingBackdrop(true)
       const { accessToken, error, user, _id} = response.data;
@@ -44,7 +44,7 @@ function Verification({formValues, setFormValues,setChangeOfPage}) {
   })
   } else {
     setOpenLoadingBackdrop(true)
-    axios.post("https://api.perxins.com/user/resendEmail", formValues)
+    axios.post("http://localhost:3001/user/resendEmail", formValues)
     .then(()=>{
       setEmailIsSend(true)
       setOpenLoadingBackdrop(false)

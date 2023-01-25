@@ -1,10 +1,41 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef } from 'react';
 import Drawer from '@mui/material/Drawer';
 import {Link} from "react-router-dom"
 import Menu from '../../SVG/Menu';
 import installPrompt from '../../helpers/installPrompt';
+import BasicAccordion from '../Accordion/BasicAccordion';
 
 export default function TemporaryDrawer({displayOfInstallButton, deferredPrompt}) {
+
+  const linksInMenu = [
+    {
+      accordionDeploy: "Cine",
+      subcategory: [
+        "3D",
+        "Normal",
+        "Clásico",
+        "Animado",
+      ]
+    },{
+      accordionDeploy: "Projects",
+      subcategory: [
+        "Universitarios",
+        "Piscina",
+        "Fiesta de Espuma",
+      ]
+    },{
+      accordionDeploy: "Teatro",
+      subcategory: [
+        "Evento Cultural",
+        "Concierto",
+        "Humor",
+      ]
+    },{
+      accordionDeploy: "Excursiones",
+      subcategory: []
+    }
+  ]
+  
   const linksContainer = useRef()
   const [state, setState] = React.useState({
     top: false,
@@ -26,7 +57,6 @@ export default function TemporaryDrawer({displayOfInstallButton, deferredPrompt}
       minHeight: "100%"
     }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     ><h3 
     className="font-color-white p-a font-size-25" 
@@ -34,22 +64,56 @@ export default function TemporaryDrawer({displayOfInstallButton, deferredPrompt}
       menú
     </h3 >
     <div className="p-a b-white barMenuAnimation" ></div>
-      <div className="d-f a-i-c f-d-c">
+      <div className="d-f a-i-c f-d-c"
+      style={{}}>
         <div 
           ref={linksContainer}
-          id="Link"
-          className="d-f a-i-c f-d-c" 
+          className="d-f a-i-c f-d-c j-c-s-e" 
+          style={{minHeight: "80vh"}}
           initial="close"
           animate="open"
         >
-            <div ><Link to={`/`} >Inicio</Link></div>
+          {linksInMenu.map((link, key)=>(
+            <BasicAccordion
+              name={link.accordionDeploy}
+            >
+                {link.subcategory.map((e, key)=>(
+                  <div className="d-f f-d-c">
+                  <Link
+                    to={ `/event?type=${link.accordionDeploy}&subcategory=${e}`}
+                    key={key}
+                    style={{
+                      color:"white",
+                      margin: "5px 20px"
+                    }}
+                    onClick={toggleDrawer(anchor, false)}
+                  >{e}</Link>
+                  {
+                  (key === link.subcategory.length - 1)
+                  &&
+                    <Link
+                    to={ `/event?type=${link.accordionDeploy}`}
+                    key={link.subcategory.length}
+                    style={{
+                      color:"white",
+                      margin: "5px 20px"
+                    }}
+                    onClick={toggleDrawer(anchor, false)}
+                    >Todos</Link>
+                }
+                </div>
+              ))}
+              
+            </BasicAccordion>
+          ))}
+{/*             <div ><Link to={`/`} >Inicio</Link></div>
             <div ><Link to="/service" >Locales</Link></div>
             <div ><Link to="/event" >Eventos</Link></div>
-            <div ><Link to="/businessOffers" >Negocios</Link></div>
+            <div ><Link to="/businessOffers" >Negocios</Link></div> */}
             <div
-            onClick={()=>installPrompt(displayOfInstallButton, deferredPrompt)}
+              onClick={()=>installPrompt(displayOfInstallButton, deferredPrompt)}
             >
-              </div>
+          </div>
         </div>
         <h2 className='font-size-40 font-color-white'>Perxins</h2>
     </div>

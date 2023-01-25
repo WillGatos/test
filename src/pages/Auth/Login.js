@@ -34,7 +34,7 @@ function Login() {
     //setProgressBarState(30)
     
     const data = { email, password };
-    axios.post("https://api.perxins.com/user/signin", data)
+    axios.post("http://localhost:3001/user/signin", data)
     .then((response) => {
         
           const { accessToken, user }= response.data;

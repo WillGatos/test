@@ -3,7 +3,7 @@ import useCheckToken from '../../Hooks/useCheckToken'
 function UnsubscribeButton({setAuthState, serviceId, fontSize}) {
   const setApiCall = useCheckToken(()=>{})
     const unSubscribeToService = () => {
-        setApiCall("get", `https://api.perxins.com/user/unsubscription/${serviceId}`)
+        setApiCall("get", `http://localhost:3001/user/unsubscription/${serviceId}`)
         .then(()=> {setAuthState(prevState=>{
             const subscriptions = prevState.subscriptions.filter(e=> e._id!==serviceId)
             return ({...prevState, subscriptions})

@@ -34,7 +34,7 @@ function ChangePassword() {
       e.preventDefault()
       setOpenLoadingBackdrop(true)
       const data = { passwordChange, jwt:paramsId };
-      axios.post("https://api.perxins.com/user/changePassword", data)
+      axios.post("http://localhost:3001/user/changePassword", data)
       .then((response) => {
         const { error, accessToken, username, _id}= response.data;
         if (error) {

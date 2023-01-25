@@ -5,7 +5,7 @@ function Denounce({toSendBody, setSuccess, route}) {
     const setApiCall = useCheckToken(()=>{})
 
     const sendDenounce = ()=>{
-        setApiCall("post", `https://api.perxins.com/services/${route}`,toSendBody )
+        setApiCall("post", `http://localhost:3001/services/${route}`,toSendBody )
         .then(()=>{
             setSuccess(true)
         })

@@ -1,5 +1,4 @@
 import BarIcon from "../SVG/Bar.svg"
-import RestaurantIcon from "../SVG/Restaurant.svg"
 import CineIcon from "../SVG/Cine.svg"
 import TheaterIcon from "../SVG/Theater.svg"
 import DiscoIcon from "../SVG/Disco.svg"
@@ -9,20 +8,24 @@ import Excursión from "../SVG/Excursión.svg"
 
 export const localType = [
     {
+      icon:CineIcon,
+      type:"Cine",
+      subcategory: [
+        "Clásico",
+        "Normal",
+        "3D",
+        "Infantil",
+      ]
+    },
+    {
       icon:BarIcon,
       type:"Bar",
-    },{
-      icon:RestaurantIcon,
-      type:"Restaurante",
     },{
       icon:TheaterIcon,
       type:"Teatro",
     },{
       icon:DiscoIcon,
       type:"Discoteca",
-    },{
-      icon:CineIcon,
-      type:"Cine",
     },{
       icon:Excursión,
       type:"Excursión",

@@ -9,28 +9,28 @@ function Admin() {
   const [searchBarValue, setSearchBarValue] = useState("")
 
   const eventsRoutes = {
-    getAllRoute: "https://api.perxins.com/events/findForAdmin",
-    perxinsGiftRoute: "https://api.perxins.com/events/perxinsGift/",
-    isPayingRoute: "https://api.perxins.com/events/isPaying/",
+    getAllRoute: "http://localhost:3001/events/findForAdmin",
+    perxinsGiftRoute: "http://localhost:3001/events/perxinsGift/",
+    isPayingRoute: "http://localhost:3001/events/isPaying/",
     updateRoute: '/updateevent/',
-    deleteRoute : "https://api.perxins.com/events/admin/",
-    getCountRoute: "https://api.perxins.com/events/count",
+    deleteRoute : "http://localhost:3001/events/admin/",
+    getCountRoute: "http://localhost:3001/events/count",
   }
 
   const servicesRoutes = {
-    getAllRoute: "https://api.perxins.com/services/findForAdmin",
-    perxinsGiftRoute: "https://api.perxins.com/services/perxinsGift/",
-    isPayingRoute: "https://api.perxins.com/services/isPaying/",
+    getAllRoute: "http://localhost:3001/services/findForAdmin",
+    perxinsGiftRoute: "http://localhost:3001/services/perxinsGift/",
+    isPayingRoute: "http://localhost:3001/services/isPaying/",
     updateRoute: '/updateservice/',
-    deleteRoute : "https://api.perxins.com/services/admin/",
-    getCountRoute: "https://api.perxins.com/services/count",
+    deleteRoute : "http://localhost:3001/services/admin/",
+    getCountRoute: "http://localhost:3001/services/count",
   }
 
   const usersRoutes = {
-    getAllRoute: "https://api.perxins.com/user/findForAdmin/",
-    isAuthRoute: "https://api.perxins.com/user/changeAuth/",
-    isAdminRoute: "https://api.perxins.com/user/changeAdmin/",
-    getCountRoute: "https://api.perxins.com/user/count/",
+    getAllRoute: "http://localhost:3001/user/findForAdmin/",
+    isAuthRoute: "http://localhost:3001/user/changeAuth/",
+    isAdminRoute: "http://localhost:3001/user/changeAdmin/",
+    getCountRoute: "http://localhost:3001/user/count/",
   }
 
   const handleWindowChange = () =>{

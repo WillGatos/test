@@ -43,7 +43,7 @@ function Profile({deferredPrompt, displayOfInstallButton}) {
         .then(e =>{
           setUserImages(e.data.secure_url)
           setAuthState({...authState, userPicture:e.data.secure_url })
-            axios.post("https://api.perxins.com/user/userPic",{userPicture:e.data.secure_url},
+            axios.post("http://localhost:3001/user/userPic",{userPicture:e.data.secure_url},
             {
               headers:  {'Authorization': 'Bearer '+ accessToken},
             } )
@@ -79,7 +79,7 @@ function Profile({deferredPrompt, displayOfInstallButton}) {
       }
     });
     axios
-        .patch('https://api.perxins.com/user/update', updateFormValues,
+        .patch('http://localhost:3001/user/update', updateFormValues,
         { headers: {'Authorization': 'Bearer '+ accessToken},}
       )
       .then(() => {

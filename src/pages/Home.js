@@ -5,7 +5,16 @@ import EventsImage from "../SVG/EventsImage.png"
 import BusinessOffers from "../SVG/BusinessOffers.png"
 import PagesFooter from './PagesFooter';
 import installPrompt from '../helpers/installPrompt';
+import { useParams } from 'react-router-dom';
+
 function Home({deferredPrompt, displayOfInstallButton}) {
+    const {comida} = useParams();
+
+    React.useEffect(() => {
+      console.log(1,comida)
+    }, [comida])
+    
+
     const individualService = {
         contact:{
             pageFootersName : "PERXINS",
@@ -34,26 +43,22 @@ function Home({deferredPrompt, displayOfInstallButton}) {
                 </p>
 
                 <button
-              style={{
-                width: "200px",
-                height: "45px",
-                background: "linear-gradient(0deg,#87168b,#005eff)",
-                border: "0px solid",
-                fontSize: "1.1rem",
-                maxWidth: "200px",
-                alignSelf:"center",
-                marginBottom:"10px",
-                borderRadius:"26px",
-                display: `${displayOfInstallButton.current}`}}
+                style={{
+                    width: "200px",
+                    height: "45px",
+                    background: "linear-gradient(0deg,#87168b,#005eff)",
+                    border: "0px solid",
+                    fontSize: "1.1rem",
+                    maxWidth: "200px",
+                    alignSelf:"center",
+                    marginBottom:"10px",
+                    borderRadius:"26px",
+                    display: `${displayOfInstallButton.current}`}}
                 onClick={()=>{
                     installPrompt(deferredPrompt, displayOfInstallButton)}}
                 >
                 Instalar Aplicación
                 </button>
-{/**display: flex;
-flex-direction: row;
-
-justify-content: center; */}
             <div className='d-f j-c-c f-w-w' style={{"margin": "25px 0"}}>
             {sections.map((e, key) =>{
                 return(

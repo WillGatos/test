@@ -5,7 +5,7 @@ function MakeReservation({toSendBody, setSuccess}) {
     const setApiCall = useCheckToken(()=>{})
 
     const sendReservation = ()=>{
-        setApiCall("post", "https://api.perxins.com/services/denounce",toSendBody )
+        setApiCall("post", "http://localhost:3001/services/denounce",toSendBody )
         .then(()=>{
             setSuccess(true)
         })

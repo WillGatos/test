@@ -24,7 +24,7 @@ function ProfileCard({
 
     const deleteSelection = (selection,id) => {
         axios
-        .delete(`https://api.perxins.com/${selection}s/${id}`, {
+        .delete(`http://localhost:3001/${selection}s/${id}`, {
           headers:  {'Authorization': 'Bearer '+ accessToken},
         })
         .then(() => setAuthState(prevState=> {

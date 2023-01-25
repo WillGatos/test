@@ -20,7 +20,7 @@ function SendEmailToChangePassword() {
       setError(false)
       setOpenLoadingBackdrop(true)
       const data = { email };
-      axios.post("https://api.perxins.com/user/sendEmailToChangePassword", data,
+      axios.post("http://localhost:3001/user/sendEmailToChangePassword", data,
       {headers: {'Authorization': 'Bearer '+ paramsId}})
       .then(() => {
         setOpenLoadingBackdrop(false)

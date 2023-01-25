@@ -27,7 +27,7 @@ function GoogleLoginButton({setError}) {
             )}
             onSuccess={(responseGoogle)=>{
               
-              axios.post("https://api.perxins.com/user/googleSign", responseGoogle.profileObj)
+              axios.post("http://localhost:3001/user/googleSign", responseGoogle.profileObj)
               .then((response)=> {
                 
                 const { accessToken, user, isNewUser }= response.data;

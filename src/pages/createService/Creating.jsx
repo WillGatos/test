@@ -141,7 +141,7 @@ function Create({serviceOrEvent, route, method}) {
       history.push("/login");
     }
     if(id && method!=="patch" && serviceOrEvent === "event"){
-      setApiCall( "get", "https://api.perxins.com/services/getName/" + id )
+      setApiCall( "get", "http://localhost:3001/services/getName/" + id )
       .then((e)=>{
         setFormValues({ ...formValues, placeToSetEvent: e.data.name })
       })

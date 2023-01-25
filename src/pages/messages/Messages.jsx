@@ -30,7 +30,7 @@ function Messages({serviceOrEvent}) {
 
     React.useEffect(()=>{
         console.log(location)
-        axios.get(`https://api.perxins.com/${serviceOrEvent}s/message/${id}`)
+        axios.get(`http://localhost:3001/${serviceOrEvent}s/message/${id}`)
         .then((e)=>{
             setMessageList(e.data.messages);
         })
@@ -43,7 +43,7 @@ function Messages({serviceOrEvent}) {
     }
     const createMessage=()=>{
         axios.post(
-        `https://api.perxins.com/${serviceOrEvent}Messages/${id}`, 
+        `http://localhost:3001/${serviceOrEvent}Messages/${id}`, 
         { messages: message },
         {headers: {'Authorization': 'Bearer '+ accessToken}}
         )
@@ -63,7 +63,7 @@ function Messages({serviceOrEvent}) {
 
     const updateMessage = async ()=>{
         await axios.patch(
-        `https://api.perxins.com/${serviceOrEvent}Messages/${toEditComment}`,
+        `http://localhost:3001/${serviceOrEvent}Messages/${toEditComment}`,
         { messages: message },
         {headers: {'Authorization': 'Bearer '+ accessToken}})
         .then(() => setMessageList(prevState=> {
@@ -83,7 +83,7 @@ function Messages({serviceOrEvent}) {
 
     const deleteMessage= async (messageId)=>{
         await axios.delete(
-        `https://api.perxins.com/${serviceOrEvent}Messages/${id}/${messageId}`,
+        `http://localhost:3001/${serviceOrEvent}Messages/${id}/${messageId}`,
         {headers: {'Authorization': 'Bearer '+ accessToken}})
         .then(() => setMessageList(prevState=> {
 

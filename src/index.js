@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import * as serviceRegistration from './serviceWorkerRegistration';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://api.perxins.com'; //https://api.perxins.com
+axios.defaults.baseURL = 'http://localhost:3001'; //https://api.perxins.com
 
 ReactDOM.render(
     <Router>

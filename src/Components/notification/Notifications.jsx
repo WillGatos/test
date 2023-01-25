@@ -23,7 +23,7 @@ function Notifications({setIsNotificationPanelOpen, isNotificationPanelOpen}) {
         if(!hasLoaded.current){
           console.log("hasLoaded.current",!hasLoaded.current)
         skip.current = 0
-        axios.post(`https://api.perxins.com/user/findNotifications?limit=10&skip=${skip.current}`,{},
+        axios.post(`http://localhost:3001/user/findNotifications?limit=10&skip=${skip.current}`,{},
         {headers: {'Authorization': 'Bearer '+ accessToken}})
         .then(e=> {
             setAuthState({...authState, notifications: 0});
@@ -52,7 +52,7 @@ function Notifications({setIsNotificationPanelOpen, isNotificationPanelOpen}) {
         setChargingData(true)
         console.log("skip.current", skip.current)
         skip.current = skip.current + 10
-        axios.post(`https://api.perxins.com/user/findNotifications?limit=10&skip=${skip.current}`,{},
+        axios.post(`http://localhost:3001/user/findNotifications?limit=10&skip=${skip.current}`,{},
         {headers: {'Authorization': 'Bearer '+ accessToken}})
         .then((e) => {
           console.log(e.data.notifications.length !== 0)

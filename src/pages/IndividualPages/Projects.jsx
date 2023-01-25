@@ -97,7 +97,7 @@ function IndividualPage({serviceOrEvent}) {
     const sendRating = ()=>{
         setApiCall(
         "post",
-        "https://api.perxins.com/services/rateService", 
+        "http://localhost:3001/services/rateService", 
         {serviceId: individualService._id,
         ratings:{
             "serviceQualityRating": {
@@ -117,7 +117,7 @@ function IndividualPage({serviceOrEvent}) {
         })
     }
     useEffect(() => {
-          setApiCall("get",`https://api.perxins.com/${serviceOrEvent}s/${id}`)
+          setApiCall("get",`http://localhost:3001/${serviceOrEvent}s/${id}`)
           .then(response=>{
             if(serviceOrEvent === "service"){
                 const data = response.data.service;
