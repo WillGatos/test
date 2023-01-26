@@ -18,7 +18,7 @@ function Share() {
             <div>
                 Share WhatsApp
             </div>
-            {`${todayCinemas.map(e=>e.name)}`}
+            {`${todayCinemas.map(e=>(`🎞${e.name}🎞 %0a`))}`}
             <div>
                 {todayCinemas.map(cine => (
                     <Cards
